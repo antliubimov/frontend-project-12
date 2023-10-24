@@ -24,5 +24,8 @@
   "homepage": "https://github.com/antliubimov/frontend-project-12#readme",
   "dependencies": {
     "@hexlet/chat-server": "^1.1.8"
+  },
+  "devDependencies": {
+    "eslint-plugin-functional": "^6.0.0"
   }
 }
