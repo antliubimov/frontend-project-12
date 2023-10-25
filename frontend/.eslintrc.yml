@@ -3,6 +3,8 @@
 # а не в корне проекта
 # Не забудьте удалить ключ eslintConfig из package.json,
 # автоматический созданный при запуске CRA
+root: true
+
 env:
   browser: true
   es2021: true
@@ -35,6 +37,7 @@ rules:
   functional/functional-parameters: 0
   functional/no-try-statement: 0
   functional/no-throw-statement: 0
+  functional/no-return-void: 0
   no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }]
   react/function-component-definition: [2, { "namedComponents": "arrow-function" }]
   testing-library/no-debug: 0
