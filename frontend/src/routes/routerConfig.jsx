@@ -1,14 +1,15 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import routes from './routes';
 import PageNotFound from '../pages/404';
 import Login from '../pages/Login';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: routes.rootPagePath(),
     element: <div>Hello</div>,
   },
   {
-    path: '/login',
+    path: routes.loginPagePath(),
     element: <Login />,
   },
   {
