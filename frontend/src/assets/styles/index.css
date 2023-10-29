@@ -1,4 +1,4 @@
-@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/dist/css/bootstrap';
 @import '~react-toastify/dist/ReactToastify.css';
 
 body {
