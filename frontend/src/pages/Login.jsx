@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
@@ -21,14 +21,13 @@ const SignupSchema = Yup.object().shape({
 const LoginPage = () => {
   const [authError, setAuthError] = useState(false);
 
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
   const { logIn } = useAuth();
-  const nameRef = useRef();
+  const usernameRef = useRef();
 
-  /* eslint-disable */
   useEffect(() => {
-    nameRef.current.focus();
+    usernameRef.current.focus();
   }, []);
 
   const formik = useFormik({
@@ -43,14 +42,13 @@ const LoginPage = () => {
         const { data } = await axios.post(routes.loginPath(), values);
         window.localStorage.setItem('userId', JSON.stringify(data));
         logIn();
-        console.log(location);
-        const { from } = location.state;
-        navigate(from);
+        // const { from } = location.state;
+        navigate(routes.rootPagePath());
       } catch (err) {
         formik.setSubmitting(false);
         if (err.isAxiosError && err.response.status === 401) {
           setAuthError(true);
-          nameRef.current.select();
+          usernameRef.current.select();
           return;
         }
         throw err;
@@ -74,7 +72,7 @@ const LoginPage = () => {
               <Form.Control
                 onChange={formik.handleChange}
                 value={formik.values.username}
-                ref={nameRef}
+                ref={usernameRef}
                 id="username"
                 name="username"
                 type="text"
