@@ -20,7 +20,6 @@ const SignupSchema = Yup.object().shape({
 
 const LoginPage = () => {
   const [authError, setAuthError] = useState(false);
-
   // const location = useLocation();
   const navigate = useNavigate();
   const { logIn } = useAuth();
@@ -37,12 +36,12 @@ const LoginPage = () => {
     },
     validationSchema: SignupSchema,
     onSubmit: async (values) => {
+      setAuthError(false);
       try {
         const { data } = await axios.post(routes.loginPath(), values);
-        window.localStorage.setItem('userId', JSON.stringify(data));
-        setAuthError(false);
-        logIn();
-        navigate(routes.rootPagePath());
+        logIn(data);
+        const to = routes.rootPagePath();
+        navigate(to);
       } catch (err) {
         formik.setSubmitting(false);
         if (err.isAxiosError && err.response.status === 401) {
@@ -62,43 +61,45 @@ const LoginPage = () => {
         </div>
         <div className="w-50">
           <h1>Войти</h1>
-          <Form onSubmit={formik.handleSubmit} className="d-flex flex-column gap-3 position-relative">
-            <FloatingLabel
-              label="Ваш ник"
-              className="mb-3"
-            >
-              <Form.Control
-                onChange={formik.handleChange}
-                value={formik.values.username}
-                ref={usernameRef}
-                id="username"
-                name="username"
-                type="text"
-                placeholder="username"
-                autoComplete="username"
-                isInvalid={authError}
-                required
-              />
-            </FloatingLabel>
-            <FloatingLabel
-              label="Пароль"
-              className="mb-3"
-            >
-              <Form.Control
-                onChange={formik.handleChange}
-                value={formik.values.password}
-                id="password"
-                type="password"
-                placeholder="Пароль"
-                name="password"
-                autoComplete="current-password"
-                isInvalid={authError}
-                required
-              />
-              <Form.Control.Feedback type="invalid" tooltip>
-                Неверные имя пользователя или пароль
-              </Form.Control.Feedback>
-            </FloatingLabel>
+          <Form onSubmit={formik.handleSubmit} className="d-flex flex-column gap-3">
+            <Form.Group>
+              <FloatingLabel
+                label="Ваш ник"
+                className="mb-3"
+              >
+                <Form.Control
+                  onChange={formik.handleChange}
+                  value={formik.values.username}
+                  ref={usernameRef}
+                  id="username"
+                  name="username"
+                  type="text"
+                  placeholder="username"
+                  autoComplete="username"
+                  isInvalid={authError}
+                  required
+                />
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group>
+              <FloatingLabel
+                label="Пароль"
+                className="mb-3"
+              >
+                <Form.Control
+                  onChange={formik.handleChange}
+                  value={formik.values.password}
+                  id="password"
+                  type="password"
+                  placeholder="Пароль"
+                  name="password"
+                  autoComplete="current-password"
+                  isInvalid={authError}
+                  required
+                />
+                {authError && <Form.Control.Feedback type="invalid" tooltip>Неверные имя пользователя или пароль</Form.Control.Feedback>}
+              </FloatingLabel>
+            </Form.Group>
             <Button variant="outline-primary" type="submit">Войти</Button>
           </Form>
         </div>
