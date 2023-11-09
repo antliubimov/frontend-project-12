@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import routes from '../routes/routes';
 
 const ChatPage = () => {
   const tmp = 'Hello in this chat';
 
   useEffect(() => {
-    const { token } = window.localStorage.getItem('userId');
-    console.log(token);
   }, []);
 
   return (
