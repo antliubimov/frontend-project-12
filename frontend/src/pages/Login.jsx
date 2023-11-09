@@ -49,6 +49,7 @@ const LoginPage = () => {
         if (err.isAxiosError && err.response.status === 401) {
           setAuthError(true);
           usernameRef.current.select();
+          console.log(err);
           return;
         }
         throw err;
@@ -64,7 +65,7 @@ const LoginPage = () => {
         </div>
         <div className="w-50">
           <h1>Войти</h1>
-          <Form onSubmit={formik.handleSubmit} className="d-flex flex-column gap-3">
+          <Form onSubmit={formik.handleSubmit} className="d-flex flex-column gap-3 position-relative">
             <FloatingLabel
               label="Ваш ник"
               className="mb-3"
@@ -78,6 +79,7 @@ const LoginPage = () => {
                 type="text"
                 placeholder="username"
                 autoComplete="username"
+                isInvalid={authError}
                 required
               />
             </FloatingLabel>
@@ -93,10 +95,13 @@ const LoginPage = () => {
                 placeholder="Пароль"
                 name="password"
                 autoComplete="current-password"
+                isInvalid={authError}
                 required
               />
+              <Form.Control.Feedback type="invalid" tooltip>
+                Неверные имя пользователя или пароль
+              </Form.Control.Feedback>
             </FloatingLabel>
-            {authError && <div className="invalid-feedback">the username or password is incorrect</div>}
             <Button variant="outline-primary" type="submit">Войти</Button>
           </Form>
         </div>
