@@ -3,27 +3,37 @@ import AuthContext from '../contexts';
 import RouterConfig from '../routes/routerConfig';
 
 const AuthProvider = ({ children }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const currentUser = JSON.parse(localStorage.getItem('user'));
+  const [user, setUser] = useState(currentUser ? { username: currentUser.username } : null);
 
-  const logIn = () => setLoggedIn(true);
-
-  /* eslint-disable */
-  const logOut = () => {
-    localStorage.removeItem('userId');
-    setLoggedIn(false);
+  const logIn = (userData) => {
+    localStorage.setItem('user', JSON.stringify(userData));
+    setUser({ username: userData.username });
   };
 
-  /* eslint-enable */
+  const logOut = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+  };
+
+  const getAuthHeader = () => {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    return userData?.token ? { Authorization: `Bearer ${userData.token}` } : {};
+  };
+
   const value = useMemo(
-    () => ({ loggedIn, logIn, logOut }),
-    [loggedIn],
+    () => ({
+      user,
+      logIn,
+      logOut,
+      getAuthHeader,
+    }),
+    [user],
   );
 
   return (
     <AuthContext.Provider value={value}>
-      {useMemo(() => (
-        children
-      ), [children])}
+      {children}
     </AuthContext.Provider>
   );
 };
