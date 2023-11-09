@@ -38,19 +38,16 @@ const LoginPage = () => {
     validationSchema: SignupSchema,
     onSubmit: async (values) => {
       try {
-        setAuthError(false);
         const { data } = await axios.post(routes.loginPath(), values);
         window.localStorage.setItem('userId', JSON.stringify(data));
+        setAuthError(false);
         logIn();
-        // const { from } = location.state;
         navigate(routes.rootPagePath());
       } catch (err) {
         formik.setSubmitting(false);
         if (err.isAxiosError && err.response.status === 401) {
           setAuthError(true);
           usernameRef.current.select();
-          console.log(err);
-          return;
         }
         throw err;
       }
