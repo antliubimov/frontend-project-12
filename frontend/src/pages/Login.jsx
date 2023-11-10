@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import * as Yup from 'yup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Image from 'react-bootstrap/Image';
-import loginImg from '../assets/images/login.svg';
 import routes from '../routes/routes';
 import useAuth from '../hooks/index.jsx';
+import loginImg from '../assets/images/login.svg';
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
@@ -19,11 +20,12 @@ const SignupSchema = Yup.object().shape({
 });
 
 const LoginPage = () => {
-  const [authError, setAuthError] = useState(false);
+  const [isAuthFailed, setIsAuthFailed] = useState(false);
   // const location = useLocation();
   const navigate = useNavigate();
   const { logIn } = useAuth();
   const usernameRef = useRef();
+  const { t } = useTranslation();
 
   useEffect(() => {
     usernameRef.current.focus();
@@ -36,7 +38,7 @@ const LoginPage = () => {
     },
     validationSchema: SignupSchema,
     onSubmit: async (values) => {
-      setAuthError(false);
+      setIsAuthFailed(false);
       try {
         const { data } = await axios.post(routes.loginPath(), values);
         logIn(data);
@@ -45,7 +47,7 @@ const LoginPage = () => {
       } catch (err) {
         formik.setSubmitting(false);
         if (err.isAxiosError && err.response.status === 401) {
-          setAuthError(true);
+          setIsAuthFailed(true);
           usernameRef.current.select();
         }
         throw err;
@@ -57,14 +59,14 @@ const LoginPage = () => {
     <main className="d-flex justify-content-center align-items-center vh-100">
       <div className="d-flex w-75 justify-content-center align-items-center">
         <div className="w-25 m-3">
-          <Image src={loginImg} alt="Login" fluid />
+          <Image src={loginImg} alt={t('login.header')} fluid />
         </div>
         <div className="w-50">
-          <h1>Войти</h1>
+          <h1>{t('login.header')}</h1>
           <Form onSubmit={formik.handleSubmit} className="d-flex flex-column gap-3">
             <Form.Group>
               <FloatingLabel
-                label="Ваш ник"
+                label={t('login.username')}
                 className="mb-3"
               >
                 <Form.Control
@@ -76,14 +78,14 @@ const LoginPage = () => {
                   type="text"
                   placeholder="username"
                   autoComplete="username"
-                  isInvalid={authError}
+                  isInvalid={isAuthFailed}
                   required
                 />
               </FloatingLabel>
             </Form.Group>
             <Form.Group>
               <FloatingLabel
-                label="Пароль"
+                label={t('login.password')}
                 className="mb-3"
               >
                 <Form.Control
@@ -94,13 +96,13 @@ const LoginPage = () => {
                   placeholder="Пароль"
                   name="password"
                   autoComplete="current-password"
-                  isInvalid={authError}
+                  isInvalid={isAuthFailed}
                   required
                 />
-                {authError && <Form.Control.Feedback type="invalid" tooltip>Неверные имя пользователя или пароль</Form.Control.Feedback>}
+                {isAuthFailed && <Form.Control.Feedback type="invalid" tooltip>{t('login.authFailed')}</Form.Control.Feedback>}
               </FloatingLabel>
             </Form.Group>
-            <Button variant="outline-primary" type="submit">Войти</Button>
+            <Button variant="outline-primary" type="submit">{t('login.submit')}</Button>
           </Form>
         </div>
       </div>
