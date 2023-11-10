@@ -6,7 +6,6 @@ import './assets/styles/index.css';
 
 const init = async () => {
   const i18n = i18next.createInstance();
-  /* eslint-disable */
   await i18n
     .use(initReactI18next)
     .init({
