@@ -39,11 +39,9 @@ const AuthProvider = ({ children }) => {
 };
 
 const App = () => (
-  <React.StrictMode>
-    <AuthProvider>
-      <RouterConfig />
-    </AuthProvider>
-  </React.StrictMode>
+  <AuthProvider>
+    <RouterConfig />
+  </AuthProvider>
 );
 
 export default App;
