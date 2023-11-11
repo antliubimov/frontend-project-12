@@ -1,21 +1,28 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import routes from './routes';
-import PageNotFound from '../pages/404';
-import Login from '../pages/Login';
-import Chat from '../pages/Chat';
+import NotFoundPage from '../pages/NotFoundPage';
+import LoginPage from '../pages/LoginPage';
+import ChatPage from '../pages/ChatPage';
+import PrivateOutlet from '../components/PrivateOutlet';
 
 const router = createBrowserRouter([
   {
-    path: routes.rootPagePath(),
-    element: <Chat />,
+    path: routes.chatPagePath(),
+    element: <PrivateOutlet />,
+    children: [
+      {
+        path: '',
+        element: <ChatPage />,
+      },
+    ],
   },
   {
     path: routes.loginPagePath(),
-    element: <Login />,
+    element: <LoginPage />,
   },
   {
     path: '*',
-    element: <PageNotFound />,
+    element: <NotFoundPage />,
   },
 ]);
 
