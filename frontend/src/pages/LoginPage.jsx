@@ -42,7 +42,7 @@ const LoginPage = () => {
       try {
         const { data } = await axios.post(routes.loginPath(), values);
         logIn(data);
-        const to = routes.rootPagePath();
+        const to = routes.chatPagePath();
         navigate(to);
       } catch (err) {
         formik.setSubmitting(false);
