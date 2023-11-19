@@ -7,5 +7,8 @@ export default {
       submit: 'Submit',
       authFailed: 'Username or password in incorrect',
     },
+    channels: {
+      channels: 'Channels',
+    },
   },
 };

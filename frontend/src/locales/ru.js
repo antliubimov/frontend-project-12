@@ -7,5 +7,8 @@ export default {
       submit: 'Войти',
       authFailed: 'Неверные имя пользователя или пароль',
     },
+    channels: {
+      channels: 'Каналы',
+    },
   },
 };
