@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import useAuth from '../hooks/index.jsx';
 import routes from '../routes/routes';
 import { actions } from '../slices';
+import ChannelsBox from '../components/ChannelsBox';
 import ChatBox from '../components/ChatBox';
 
 const ChatPage = () => {
   const auth = useAuth();
   const dispatch = useDispatch();
+  const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
     /* eslint-disable */
@@ -21,11 +23,28 @@ const ChatPage = () => {
       }
     };
     fetchData();
-  }, [auth]);
+    setIsFetching(false);
+  }, [auth, dispatch]);
 
-  return (
-    <ChatBox />
-  );
+  return isFetching
+      ? (
+        <>
+          'loading'
+        </>
+      ) : (
+        <>
+          <div className="container h-100 my-4 overflow-hidden rounded shadow">
+            <div className="row h-100 bg-white flex-md-row">
+              <div className="col-4 col-md-2 border-end px-0 bg-primary-subtle flex-column h-100 d-flex">
+                <ChannelsBox />
+              </div>
+              <div className="col p-0 h-100">
+                <ChatBox />
+              </div>
+            </div>
+          </div>
+        </>
+      );
 };
 
 export default ChatPage;
