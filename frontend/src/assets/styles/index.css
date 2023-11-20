@@ -14,3 +14,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.bg-root-gradient {
+  background-image: linear-gradient(to right top, #eeeeee, #dddce1, #cecbd4, #beb9c6, #b0a8b9);
+}
+
+.bg-channelbox {
+  background-color: #005893;
+}
