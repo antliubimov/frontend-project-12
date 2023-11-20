@@ -9,6 +9,8 @@ export default {
     },
     channels: {
       channels: 'Каналы',
+      remove: 'Удалить',
+      rename: 'Переименовать',
     },
   },
 };
