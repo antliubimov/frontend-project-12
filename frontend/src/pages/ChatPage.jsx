@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import useAuth from '../hooks/index.jsx';
+import { useAuth } from '../hooks';
 import routes from '../routes/routes';
 import { actions } from '../slices';
 import ChannelsBox from '../components/ChannelsBox';

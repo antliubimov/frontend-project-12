@@ -9,7 +9,7 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Image from 'react-bootstrap/Image';
 import routes from '../routes/routes';
-import useAuth from '../hooks/index.jsx';
+import { useAuth } from '../hooks/index';
 import loginImg from '../assets/images/login.svg';
 
 const SignupSchema = Yup.object().shape({

@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import AuthContext from '../contexts';
+import { AuthContext } from '../contexts/index';
 import RouterConfig from '../routes/routerConfig';
 
 const AuthProvider = ({ children }) => {
