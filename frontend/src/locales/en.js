@@ -12,5 +12,9 @@ export default {
       remove: 'Remove',
       rename: 'Rename',
     },
+    chat: {
+      messageCount_one: 'message',
+      messageCount_other: 'messages',
+    },
   },
 };

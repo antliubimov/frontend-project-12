@@ -12,5 +12,11 @@ export default {
       remove: 'Удалить',
       rename: 'Переименовать',
     },
+    chat: {
+      messageCount_zero: 'сообщений',
+      messageCount_one: 'сообщение',
+      messageCount_few: 'сообщения',
+      messageCount_many: 'сообщений',
+    },
   },
 };
