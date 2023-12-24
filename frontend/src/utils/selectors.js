@@ -6,5 +6,5 @@ export const getCurrentChannel = (state) => {
 export const getMessagesForCurrentChannel = (state) => {
   const { currentChannelId } = state.channelsReducer;
   const { messages } = state.messagesReducer;
-  return messages.filter((m) => m.channelId === currentChannelId);
+  return messages.filter((message) => message.channelId === currentChannelId);
 };
