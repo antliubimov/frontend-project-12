@@ -9,6 +9,10 @@ const messagesSlice = createSlice({
   name: 'messages',
   initialState,
   reducers: {
+    addMessage(state, { payload }) {
+      const { message } = payload;
+      state.messages.push(message);
+    },
   },
   extraReducers: (builder) => {
     builder
