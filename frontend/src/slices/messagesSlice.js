@@ -19,6 +19,10 @@ const messagesSlice = createSlice({
       .addCase(channelsActions.setInitialState, (state, { payload }) => {
         const { messages } = payload;
         state.messages = messages;
+      })
+      .addCase(channelsActions.removeChannel, (state, { payload }) => {
+        const { channelId } = payload;
+        state.messages = state.messages.filter((message) => message.channelId === channelId);
       });
   },
 });

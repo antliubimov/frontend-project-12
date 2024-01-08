@@ -41,6 +41,9 @@ const init = async (socket) => {
 
   const api = {
     sendMessage: withAcknowledgement((...args) => socket.volatile.emit('newMessage', ...args)),
+    createChannel: withAcknowledgement((...args) => socket.volatile.emit('newChannel', ...args)),
+    renameChannel: withAcknowledgement((...args) => socket.volatile.emit('renameChannel', ...args)),
+    removeChannel: withAcknowledgement((...args) => socket.volatile.emit('removeChannel', ...args)),
   };
 
   const store = configureStore({
@@ -49,6 +52,15 @@ const init = async (socket) => {
 
   socket.on('newMessage', (payload) => {
     store.dispatch(actions.addMessage({ message: payload }));
+  });
+  socket.on('newChannel', (payload) => {
+    store.dispatch(actions.addChannel({ channel: payload }));
+  });
+  socket.on('renameChannel', (payload) => {
+    store.dispatch(actions.renameChannel({ channelId: payload.id, channelName: payload.name }));
+  });
+  socket.on('removeChannel', (payload) => {
+    store.dispatch(actions.removeChannel({ channelId: payload.id }));
   });
 
   return (
