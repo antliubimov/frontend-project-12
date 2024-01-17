@@ -6,6 +6,7 @@ import routes from '../routes/routes';
 import { actions } from '../slices';
 import ChannelsBox from '../components/ChannelsBox';
 import ChatBox from '../components/ChatBox';
+import Modal from '../components/Modal';
 
 const ChatPage = () => {
   const auth = useAuth();
@@ -39,6 +40,7 @@ const ChatPage = () => {
                 <ChannelsBox />
               </div>
               <div className="col p-0 h-100">
+                <Modal />
                 <ChatBox />
               </div>
             </div>
