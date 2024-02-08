@@ -16,14 +16,20 @@ export default {
       messageCount_one: 'message',
       messageCount_other: 'messages',
     },
-    modal: {
+    modals: {
       add: 'Add channel',
-      rename: 'Rename channel',
-      remove: 'Remove channel',
       required: 'Required',
       min: 'Must be 3 to 20 characters',
       max: 'Must be 3 to 20 characters',
       uniq: 'Must be unique',
+      rename: 'Rename channel',
+      remove: 'Remove channel',
+      submit: 'Submit',
+      cancel: 'Cancel',
+      channelName: 'Channel name',
+      confirmation: 'Are you sure?',
+      confirm: 'Confirm',
+      editChannelName: 'New channel name',
     },
   },
 };
