@@ -17,7 +17,7 @@ const Channel = ({ channel, isCurrent, handleSelect }) => {
             <Button
               key={channel.id}
               variant={variant}
-              className="w-100 rounded-0 text-light"
+              className="w-100 rounded-sm text-light text-start"
               onClick={handleSelect}
             >
               <span className="me-1">#</span>
@@ -36,7 +36,7 @@ const Channel = ({ channel, isCurrent, handleSelect }) => {
             key={channel.id}
             variant={variant}
             type="button"
-            className="w-100 rounded-0 text-start text-light"
+            className="w-100 rounded-sm text-start text-light"
             onClick={handleSelect}
           >
             <span className="me-1">#</span>
@@ -49,7 +49,7 @@ const Channel = ({ channel, isCurrent, handleSelect }) => {
 
 const ChannelsBox = () => {
   const { t } = useTranslation();
-  const { channels, currentChannelId } = useSelector((state) => state.channelsReducer);
+  const { channels, currentChannelId } = useSelector((state) => state.channelsSlice);
   const dispatch = useDispatch();
 
   const handleSelectChannel = (channelId) => () => {
