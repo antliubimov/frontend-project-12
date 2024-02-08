@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
@@ -201,7 +201,58 @@ const RenameChannelForm = ({ handleClose }) => {
   );
 };
 
-const RemoveChannelForm = () => {};
+const RemoveChannelForm = ({ handleClose }) => {
+  const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
+  const api = useApi();
+  const channelId = useSelector((state) => state.modalSlice.extra?.channelId);
+  const handleRemove = async () => {
+    setLoading(true);
+    try {
+      await api.removeChannel({ id: channelId });
+      handleClose();
+    } catch (e) {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <BootstrapModal.Header>
+        <BootstrapModal.Title>{t('modals.remove')}</BootstrapModal.Title>
+        <Button
+          variant="close"
+          type="button"
+          onClick={handleClose}
+          aria-label="Close"
+          data-bs-dismiss="modal"
+        />
+      </BootstrapModal.Header>
+      <BootstrapModal.Body>
+        <p className="lead">{t('modals.confirmation')}</p>
+        <div className="d-flex justify-content-end">
+          <Button
+            className="me-2"
+            variant="secondary"
+            type="button"
+            onClick={handleClose}
+            disabled={loading}
+          >
+            {t('modals.cancel')}
+          </Button>
+          <Button
+            variant="danger"
+            type="button"
+            onClick={handleRemove}
+            disabled={loading}
+          >
+            {t('modals.confirm')}
+          </Button>
+        </div>
+      </BootstrapModal.Body>
+    </>
+  );
+};
 
 const mapping = {
   addChannel: AddChannelForm,

@@ -10,6 +10,7 @@ const Channel = ({
   isCurrent,
   handleSelect,
   handleRename,
+  handleRemove,
 }) => {
   const { t } = useTranslation();
   const variant = isCurrent ? 'secondary' : null;
@@ -32,7 +33,7 @@ const Channel = ({
             <Dropdown.Toggle split variant={variant} className="flex-grow-0" />
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">{t('channels.remove')}</Dropdown.Item>
+              <Dropdown.Item onClick={handleRemove(channel.id)}>{t('channels.remove')}</Dropdown.Item>
               <Dropdown.Item onClick={handleRename(channel.id)}>{t('channels.rename')}</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
@@ -68,6 +69,10 @@ const ChannelsBox = () => {
     dispatch(actions.openModal({ type: 'renameChannel', extra: { channelId } }));
   };
 
+  const handleRemoveChannel = (channelId) => () => {
+    dispatch(actions.openModal({ type: 'removeChannel', extra: { channelId } }));
+  };
+
   return (
     <>
       <div className="d-flex mt-1 justify-content-between mb-2 pe-2 p-4 text-light">
@@ -88,6 +93,7 @@ const ChannelsBox = () => {
             isCurrent={channel.id === currentChannelId}
             handleSelect={handleSelectChannel(channel.id)}
             handleRename={handleRenameChannel}
+            handleRemove={handleRemoveChannel}
           />
         ))}
       </ul>
