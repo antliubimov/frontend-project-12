@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import messagesReducer, { actions as messagesActions } from './messagesSlice';
-import channelsReducer, { actions as channelsActions, defaultChannelId } from './channelsSlice';
-import modalReducer, { actions as modalActions } from './modalSlice';
+import messagesSlice, { actions as messagesActions } from './messagesSlice';
+import channelsSlice, { actions as channelsActions, defaultChannelId } from './channelsSlice';
+import modalSlice, { actions as modalActions } from './modalSlice';
 
 const actions = {
   ...messagesActions,
@@ -15,7 +15,7 @@ export {
 };
 
 export default combineReducers({
-  messagesReducer,
-  channelsReducer,
-  modalReducer,
+  messagesSlice,
+  channelsSlice,
+  modalSlice,
 });

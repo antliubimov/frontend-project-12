@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const messagesSlice = createSlice({
-  name: 'messages',
+  name: 'messagesSlice',
   initialState,
   reducers: {
     addMessage(state, { payload }) {
