@@ -13,3 +13,10 @@ export const getChannelsNames = (state) => {
   const { channels } = state.channelsSlice;
   return channels.map(({ name }) => name);
 };
+
+export const getChannelById = (channelId) => (state) => {
+  const { channels } = state.channelsSlice;
+  return channels.find(({ id }) => channelId === id);
+};
+
+export const channelsSlice = (state) => state.channelsSlice;
