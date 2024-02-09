@@ -1,5 +1,8 @@
 export default {
   translation: {
+    simpleChat: 'Simple Chat',
+    logout: 'Выйти',
+    signup: 'Регистрация',
     login: {
       username: 'Ваш ник',
       password: 'Пароль',

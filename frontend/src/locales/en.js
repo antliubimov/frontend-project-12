@@ -1,11 +1,16 @@
 export default {
   translation: {
+    simpleChat: 'Simple Chat',
+    logout: 'Log out',
+    signup: 'Signup',
     login: {
       username: 'Username',
       password: 'Password',
       header: 'Login',
       submit: 'Submit',
       authFailed: 'Username or password in incorrect',
+      signup: 'Signup',
+      newAccount: "You don't have an account?",
     },
     channels: {
       channels: 'Channels',

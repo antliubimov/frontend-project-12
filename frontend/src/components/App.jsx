@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { AuthContext } from '../contexts/index';
 import RouterConfig from '../routes/routerConfig';
+import Navbar from './Navbar';
 
 const AuthProvider = ({ children }) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
@@ -41,6 +42,7 @@ const AuthProvider = ({ children }) => {
 const App = () => (
   <AuthProvider>
     <div className="d-flex flex-column h-100">
+      <Navbar />
       <RouterConfig />
     </div>
   </AuthProvider>
