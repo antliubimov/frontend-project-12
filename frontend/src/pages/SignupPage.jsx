@@ -53,13 +53,12 @@ const SignupPage = () => {
     onSubmit: async (values) => {
       setRegistrationFailed(false);
       try {
-        // const { username, password } = values;
         const { data } = await axios.post(routes.signupPath(), values);
         logIn(data);
         const to = routes.chatPagePath();
         navigate(to);
       } catch (err) {
-        if (err.isAxiosError) {
+        if (!err.isAxiosError) {
           throw err;
         }
         if (err.response.status === 409) {
@@ -101,7 +100,7 @@ const SignupPage = () => {
                   }
                   required
                 />
-                <Form.Control.Feedback type="invalid" tooltip placement="right">
+                <Form.Control.Feedback type="invalid" tooltip>
                   {t(formik.errors.username)}
                 </Form.Control.Feedback>
               </FloatingLabel>
