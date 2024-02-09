@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import * as Yup from 'yup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -11,13 +10,6 @@ import Image from 'react-bootstrap/Image';
 import routes from '../routes/routes';
 import { useAuth } from '../hooks/index';
 import loginImg from '../assets/images/login.svg';
-
-const SignupSchema = Yup.object().shape({
-  username: Yup.string()
-    .required('Обязательное поле'),
-  password: Yup.string()
-    .required('Пожалуйста, введите пароль'),
-});
 
 const LoginPage = () => {
   const [isAuthFailed, setIsAuthFailed] = useState(false);
@@ -36,7 +28,6 @@ const LoginPage = () => {
       username: '',
       password: '',
     },
-    validationSchema: SignupSchema,
     onSubmit: async (values) => {
       setIsAuthFailed(false);
       try {
@@ -76,7 +67,7 @@ const LoginPage = () => {
                   id="username"
                   name="username"
                   type="text"
-                  placeholder="username"
+                  placeholder={t('login.username')}
                   autoComplete="username"
                   isInvalid={isAuthFailed}
                   required
@@ -93,7 +84,7 @@ const LoginPage = () => {
                   value={formik.values.password}
                   id="password"
                   type="password"
-                  placeholder="Пароль"
+                  placeholder={t('login.password')}
                   name="password"
                   autoComplete="current-password"
                   isInvalid={isAuthFailed}

@@ -19,7 +19,7 @@ const Navbar = () => {
         <BootstrapNavbar.Brand href={routes.chatPagePath()}>{t('simpleChat')}</BootstrapNavbar.Brand>
         {!user && (
           <Nav.Link href={routes.signupPagePath()}>
-            <Button variant="outline-primary">{t('signup')}</Button>
+            <Button variant="outline-primary">{t('loginup')}</Button>
           </Nav.Link>
         )}
         {!!user && <Button onClick={logOut}>{t('logout')}</Button>}

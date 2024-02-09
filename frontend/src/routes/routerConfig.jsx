@@ -3,6 +3,7 @@ import routes from './routes';
 import NotFoundPage from '../pages/NotFoundPage';
 import LoginPage from '../pages/LoginPage';
 import ChatPage from '../pages/ChatPage';
+import SignupPage from '../pages/SignupPage';
 import PrivateOutlet from '../components/PrivateOutlet';
 
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: routes.loginPagePath(),
     element: <LoginPage />,
+  },
+  {
+    path: routes.signupPagePath(),
+    element: <SignupPage />,
   },
   {
     path: '*',

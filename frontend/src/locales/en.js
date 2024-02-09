@@ -2,7 +2,7 @@ export default {
   translation: {
     simpleChat: 'Simple Chat',
     logout: 'Log out',
-    signup: 'Signup',
+    loginup: 'Signup',
     login: {
       username: 'Username',
       password: 'Password',
@@ -35,6 +35,18 @@ export default {
       confirmation: 'Are you sure?',
       confirm: 'Confirm',
       editChannelName: 'New channel name',
+    },
+    signup: {
+      username: 'Username',
+      password: 'Password',
+      confirm: 'Confirm password',
+      submit: 'Submit',
+      header: 'Signup',
+      usernameConstraints: '3 to 20 characters',
+      alreadyExists: 'Username already taken',
+      required: 'Required',
+      passMin: 'Min 6 characters',
+      mustMatch: 'Passwords must match',
     },
   },
 };

@@ -2,7 +2,7 @@ export default {
   translation: {
     simpleChat: 'Simple Chat',
     logout: 'Выйти',
-    signup: 'Регистрация',
+    loginup: 'Регистрация',
     login: {
       username: 'Ваш ник',
       password: 'Пароль',
@@ -35,6 +35,18 @@ export default {
       confirmation: 'Вы уверены?',
       confirm: 'Удалить',
       editChannelName: 'Новое имя канала',
+    },
+    signup: {
+      username: 'Имя пользователя',
+      password: 'Пароль',
+      confirm: 'Подтвердите пароль',
+      submit: 'Зарегистрироваться',
+      header: 'Регистрация',
+      usernameConstraints: 'От 3 до 20 символов',
+      alreadyExists: 'Такой пользователь уже существует',
+      required: 'Обязательное поле',
+      passMin: 'Не менее 6 символов',
+      mustMatch: 'Пароли должны совпадать',
     },
   },
 };
