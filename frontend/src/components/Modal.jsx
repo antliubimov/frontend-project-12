@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Modal as BootstrapModal, Form, Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 import { getChannelsNames, getChannelById } from '../utils/selectors.js';
 import { actions } from '../slices';
@@ -42,6 +43,7 @@ const AddChannelForm = ({ handleClose }) => {
         const data = await api.createChannel(channel);
         dispatch(actions.setCurrentChannel({ channelId: data.id }));
         handleClose();
+        toast.success(t('channels.created'));
       } catch (e) {
         setSubmitting(false);
         inputRef.current.select();
@@ -132,6 +134,7 @@ const RenameChannelForm = ({ handleClose }) => {
         getValidationSchema(channels).validateSync({ name });
         await api.renameChannel(data);
         handleClose();
+        toast.success(t('channels.renamed'));
       } catch (e) {
         setSubmitting(false);
         inputRef.current.select();
@@ -211,6 +214,7 @@ const RemoveChannelForm = ({ handleClose }) => {
     try {
       await api.removeChannel({ id: channelId });
       handleClose();
+      toast.success(t('channels.removed'));
     } catch (e) {
       setLoading(false);
     }
