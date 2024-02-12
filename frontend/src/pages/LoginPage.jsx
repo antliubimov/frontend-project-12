@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Image from 'react-bootstrap/Image';
+import {
+  Button,
+  Form,
+  FloatingLabel,
+  Image,
+} from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import routes from '../routes/routes';
 import { useAuth } from '../hooks/index';
 import loginImg from '../assets/images/login.svg';
@@ -36,12 +39,15 @@ const LoginPage = () => {
         const to = routes.chatPagePath();
         navigate(to);
       } catch (err) {
-        formik.setSubmitting(false);
-        if (err.isAxiosError && err.response.status === 401) {
+        if (!err.isAxiosError) {
+          toast.error(t('errors.unkonwn'));
+        }
+        if (err.response?.status === 401) {
           setIsAuthFailed(true);
           usernameRef.current.select();
+        } else {
+          toast.error(t('errors.network'));
         }
-        throw err;
       }
     },
   });
