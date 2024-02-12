@@ -48,5 +48,9 @@ export default {
       passMin: 'Min 6 characters',
       mustMatch: 'Passwords must match',
     },
+    errors: {
+      unknown: 'Unknown Error',
+      network: 'Network Error',
+    },
   },
 };
