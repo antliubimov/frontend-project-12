@@ -9,13 +9,14 @@ export default {
       header: 'Login',
       submit: 'Submit',
       authFailed: 'Username or password in incorrect',
-      signup: 'Signup',
-      newAccount: "You don't have an account?",
     },
     channels: {
       channels: 'Channels',
       remove: 'Remove',
       rename: 'Rename',
+      created: 'Channel created',
+      renamed: 'Channel renamed',
+      removed: 'Channel removed',
     },
     chat: {
       messageCount_one: 'message',
