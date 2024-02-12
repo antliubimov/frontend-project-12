@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { AuthContext } from '../contexts/index';
 import RouterConfig from '../routes/routerConfig';
 import Navbar from './Navbar';
@@ -44,6 +45,7 @@ const App = () => (
     <div className="d-flex flex-column h-100">
       <Navbar />
       <RouterConfig />
+      <ToastContainer />
     </div>
   </AuthProvider>
 );
