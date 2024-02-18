@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { Spinner } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks';
 import routes from '../routes/routes';
 import { actions } from '../slices';
@@ -12,6 +14,7 @@ const ChatPage = () => {
   const auth = useAuth();
   const dispatch = useDispatch();
   const [isFetching, setIsFetching] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     /* eslint-disable */
@@ -29,9 +32,11 @@ const ChatPage = () => {
 
   return isFetching
       ? (
-        <>
-          'loading'
-        </>
+        <div className="h-100 d-flex justify-content-center align-items-center">
+          <Spinner animation="border" role="status" variant="primary">
+            <span className="visually-hidden">{t('loading')}</span>
+          </Spinner>
+        </div>
       ) : (
         <>
           <div className="container h-100 my-4 overflow-hidden rounded shadow">

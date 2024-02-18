@@ -3,6 +3,7 @@ export default {
     simpleChat: 'Simple Chat',
     logout: 'Log out',
     loginup: 'Signup',
+    loading: 'Loading...',
     login: {
       username: 'Username',
       password: 'Password',

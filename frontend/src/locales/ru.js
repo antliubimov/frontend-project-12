@@ -3,6 +3,7 @@ export default {
     simpleChat: 'Simple Chat',
     logout: 'Выйти',
     loginup: 'Регистрация',
+    loading: 'Загрузка...',
     login: {
       username: 'Ваш ник',
       password: 'Пароль',
