@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Modal as BootstrapModal, Form, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import leoProfanity from 'leo-profanity';
 
 import { getChannelsNames, getChannelById } from '../utils/selectors.js';
 import { actions } from '../slices';
@@ -24,8 +25,8 @@ const AddChannelForm = ({ handleClose }) => {
   const channels = useSelector(getChannelsNames);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const inputRef = useRef(null);
   const api = useApi();
+  const inputRef = useRef(null);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -37,9 +38,10 @@ const AddChannelForm = ({ handleClose }) => {
     },
     validationSchema: getValidationSchema(channels),
     onSubmit: async ({ name }, { setSubmitting, setStatus }) => {
-      const channel = { name };
+      const filteredName = leoProfanity.clean(name);
+      const channel = { name: filteredName };
       try {
-        getValidationSchema(channels).validateSync({ name });
+        getValidationSchema(channels).validateSync({ name: filteredName });
         const data = await api.createChannel(channel);
         dispatch(actions.setCurrentChannel({ channelId: data.id }));
         handleClose();
@@ -48,7 +50,7 @@ const AddChannelForm = ({ handleClose }) => {
         setSubmitting(false);
         inputRef.current.select();
         if (e.name === 'ValidationError') {
-          formik.values.name = name;
+          formik.values.name = filteredName;
           setStatus(e.message);
         }
       }
@@ -56,6 +58,17 @@ const AddChannelForm = ({ handleClose }) => {
     validateOnBlur: false,
     validateOnChange: false,
   });
+
+  const {
+    handleSubmit,
+    isSubmitting,
+    handleChange,
+    handleBlur,
+    values,
+    errors,
+    touched,
+    status,
+  } = formik;
 
   return (
     <>
@@ -70,22 +83,22 @@ const AddChannelForm = ({ handleClose }) => {
         />
       </BootstrapModal.Header>
       <BootstrapModal.Body>
-        <Form onSubmit={formik.handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Control
               className="mb-2"
-              disabled={formik.isSubmitting}
+              disabled={isSubmitting}
               ref={inputRef}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.name}
-              isInvalid={(formik.errors.name && formik.touched.name) || !!formik.status}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.name}
+              isInvalid={(errors.name && touched.name) || !!status}
               name="name"
               id="name"
             />
             <label className="visually-hidden" htmlFor="name">{t('modals.channelName')}</label>
             <Form.Control.Feedback type="invalid">
-              {t(formik.errors.name) || t(formik.status)}
+              {t(errors.name) || t(status)}
             </Form.Control.Feedback>
             <div className="d-flex justify-content-end">
               <Button
@@ -99,7 +112,7 @@ const AddChannelForm = ({ handleClose }) => {
               <Button
                 variant="primary"
                 type="submit"
-                disabled={formik.isSubmitting}
+                disabled={isSubmitting}
               >
                 {t('modals.submit')}
               </Button>
@@ -129,9 +142,10 @@ const RenameChannelForm = ({ handleClose }) => {
     },
     validationSchema: getValidationSchema(channels),
     onSubmit: async ({ name }, { setSubmitting, setStatus }) => {
-      const data = { name, id: channelId };
+      const filteredName = leoProfanity.clean(name);
+      const data = { name: filteredName, id: channelId };
       try {
-        getValidationSchema(channels).validateSync({ name });
+        getValidationSchema(channels).validateSync({ name: filteredName });
         await api.renameChannel(data);
         handleClose();
         toast.success(t('channels.renamed'));
@@ -139,7 +153,7 @@ const RenameChannelForm = ({ handleClose }) => {
         setSubmitting(false);
         inputRef.current.select();
         if (e.name === 'ValidationError') {
-          formik.values.name = name;
+          formik.values.name = filteredName;
           setStatus(e.message);
         } else if (!e.isAxiosError) {
           throw e;

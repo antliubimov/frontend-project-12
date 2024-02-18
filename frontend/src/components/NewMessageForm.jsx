@@ -3,6 +3,8 @@ import { Form, InputGroup, Button } from 'react-bootstrap';
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
+import leoProfanity from 'leo-profanity';
 
 import { useAuth, useApi } from '../hooks/index';
 
@@ -10,6 +12,7 @@ const NewMessageForm = ({ channel }) => {
   const { user: { username } } = useAuth();
   const inputRef = useRef(null);
   const api = useApi();
+  const { t } = useTranslation();
 
   const validationSchema = yup.object().shape({
     body: yup
@@ -22,8 +25,9 @@ const NewMessageForm = ({ channel }) => {
     initialValues: { body: '' },
     validationSchema,
     onSubmit: async ({ body }) => {
+      const filteredBody = leoProfanity.clean(body);
       const message = {
-        body,
+        body: filteredBody,
         channelId: channel.id,
         username,
       };
@@ -54,9 +58,9 @@ const NewMessageForm = ({ channel }) => {
           onBlur={formik.handleBlur}
           value={formik.values.body}
           name="body"
-          // aria-label={t('chat.newMessage')}
+          aria-label={t('chat.newMessage')}
           disabled={formik.isSubmitting}
-          placeholder="Введите сообщение..."
+          placeholder={t('chat.placeholder')}
           className="border-0 p-0 ps-2"
         />
         <Button variant="group-vertical" type="submit">
