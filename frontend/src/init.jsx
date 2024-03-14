@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
+import { Provider as RollbarProvider } from '@rollbar/react';
 import App from './components/App';
 import resources from './locales/index.js';
 import './assets/styles/index.css';
@@ -10,6 +11,7 @@ import reducer, { actions } from './slices/index.js';
 import { ApiContext } from './contexts/index';
 
 const init = async (socket) => {
+  const isProduction = process.env.NODE_ENV === 'production';
   const i18n = i18next.createInstance();
   await i18n
     .use(initReactI18next)
@@ -62,6 +64,13 @@ const init = async (socket) => {
   socket.on('removeChannel', (payload) => {
     store.dispatch(actions.removeChannel({ channelId: payload.id }));
   });
+
+  const rollbarConfig = {
+    enabled: isProduction,
+    accessToken: process.env.ROLLBAR_TOKEN,
+    captureUncaught: true,
+    captureUnhandledRejections: true,
+  };
 
   return (
     <Provider store={store}>
