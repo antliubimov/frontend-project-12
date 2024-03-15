@@ -1,6 +1,6 @@
 export default {
   translation: {
-    simpleChat: 'Simple Chat',
+    simpleChat: 'Hexlet Chat',
     logout: 'Выйти',
     loginup: 'Регистрация',
     loading: 'Загрузка...',
