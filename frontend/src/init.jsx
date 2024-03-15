@@ -73,13 +73,15 @@ const init = async (socket) => {
   };
 
   return (
-    <Provider store={store}>
-      <I18nextProvider i18n={i18n}>
-        <ApiContext.Provider value={api}>
-          <App />
-        </ApiContext.Provider>
-      </I18nextProvider>
-    </Provider>
+    <RollbarProvider config={rollbarConfig}>
+      <Provider store={store}>
+        <I18nextProvider i18n={i18n}>
+          <ApiContext.Provider value={api}>
+            <App />
+          </ApiContext.Provider>
+        </I18nextProvider>
+      </Provider>
+    </RollbarProvider>
   );
 };
 
