@@ -30,7 +30,7 @@ const Channel = ({
               {channel.name}
             </Button>
 
-            <Dropdown.Toggle split variant={variant} className="flex-grow-0" />
+            <Dropdown.Toggle split variant={variant} className="flex-grow-0 text-light" />
 
             <Dropdown.Menu>
               <Dropdown.Item onClick={handleRemove(channel.id)}>{t('channels.remove')}</Dropdown.Item>
