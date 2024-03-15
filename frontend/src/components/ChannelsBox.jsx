@@ -84,6 +84,7 @@ const ChannelsBox = () => {
         >
           <PlusCircleFill size={20} color="#ffffff" />
         </button>
+        <span className="visually-hidden">+</span>
       </div>
       <ul className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
         {channels.map((channel) => (
