@@ -17,4 +17,4 @@ start:
 	make start-backend & make start-frontend
 
 build:
-	npm run build
+	npm ci && npm run build

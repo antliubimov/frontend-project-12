@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/antliubimov/frontend-project-12#readme",
   "dependencies": {
-    "@hexlet/chat-server": "^2.0.2",
+    "@hexlet/chat-server": "^1.1.9",
     "socket.io-client": "^4.7.2"
   }
 }
