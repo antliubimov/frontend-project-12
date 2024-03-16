@@ -81,6 +81,7 @@ const SignupPage = () => {
           <Form onSubmit={formik.handleSubmit} className="d-flex flex-column gap-3">
             <Form.Group>
               <FloatingLabel
+                controlId="username"
                 label={t('signup.username')}
                 className="mb-3"
               >
@@ -107,6 +108,7 @@ const SignupPage = () => {
             </Form.Group>
             <Form.Group>
               <FloatingLabel
+                controlId="password"
                 label={t('login.password')}
                 className="mb-3"
               >
@@ -132,6 +134,7 @@ const SignupPage = () => {
             </Form.Group>
             <Form.Group>
               <FloatingLabel
+                controlId="confirmPassword"
                 label={t('signup.confirm')}
                 className="mb-3"
               >
