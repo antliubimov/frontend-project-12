@@ -18,6 +18,7 @@ export default {
       created: 'Channel created',
       renamed: 'Channel renamed',
       removed: 'Channel removed',
+      actions: 'Channel management',
     },
     chat: {
       messageCount_one: 'message',

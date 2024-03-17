@@ -23,14 +23,16 @@ const Channel = ({
             <Button
               key={channel.id}
               variant={variant}
-              className="w-100 rounded-sm text-light text-start"
+              className="w-100 rounded-0 text-start text-truncate"
               onClick={handleSelect}
             >
               <span className="me-1">#</span>
               {channel.name}
             </Button>
 
-            <Dropdown.Toggle split variant={variant} className="flex-grow-0 text-light" />
+            <Dropdown.Toggle split variant={variant} className="flex-grow-0 text-light">
+              <span className="visually-hidden">{t('channels.actions')}</span>
+            </Dropdown.Toggle>
 
             <Dropdown.Menu>
               <Dropdown.Item onClick={handleRemove(channel.id)}>{t('channels.remove')}</Dropdown.Item>
@@ -83,8 +85,8 @@ const ChannelsBox = () => {
           onClick={handleAddChannel}
         >
           <PlusCircleFill size={20} color="#ffffff" />
+          <span className="visually-hidden">+</span>
         </button>
-        <span className="visually-hidden">+</span>
       </div>
       <ul className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
         {channels.map((channel) => (

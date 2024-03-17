@@ -17,7 +17,8 @@ export default {
       rename: 'Переименовать',
       created: 'Канал создан',
       renamed: 'Канал переименован',
-      removed: 'Канал удален',
+      removed: 'Канал удалён',
+      actions: 'Управление каналом',
     },
     chat: {
       messageCount_zero: 'сообщений',
