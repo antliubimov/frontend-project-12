@@ -4,7 +4,7 @@
   "description": "Simple analog of Slack",
   "main": "index.js",
   "engines": {
-    "node": ">=18.18.0 <20.0.0"
+    "node": ">=18.18.0"
   },
   "scripts": {
     "build": "npm run build --prefix frontend",
