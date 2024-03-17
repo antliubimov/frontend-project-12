@@ -6,7 +6,6 @@ import axios from 'axios';
 import {
   Button,
   Form,
-  FloatingLabel,
   Image,
 } from 'react-bootstrap';
 import { toast } from 'react-toastify';
@@ -61,45 +60,39 @@ const LoginPage = () => {
         <div className="w-50">
           <h1>{t('login.header')}</h1>
           <Form onSubmit={formik.handleSubmit} className="d-flex flex-column gap-3">
-            <Form.Group>
-              <FloatingLabel
-                controlId="username"
-                label={t('login.username')}
-                className="mb-3"
-              >
-                <Form.Control
-                  onChange={formik.handleChange}
-                  value={formik.values.username}
-                  ref={usernameRef}
-                  id="username"
-                  name="username"
-                  type="text"
-                  placeholder={t('login.username')}
-                  autoComplete="username"
-                  isInvalid={isAuthFailed}
-                  required
-                />
-              </FloatingLabel>
+            <Form.Group className="form-floating mb-3">
+              <Form.Control
+                onChange={formik.handleChange}
+                value={formik.values.username}
+                ref={usernameRef}
+                id="username"
+                name="username"
+                type="text"
+                placeholder={t('login.username')}
+                autoComplete="username"
+                isInvalid={isAuthFailed}
+                required
+              />
+              <label htmlFor="username">
+                {t('login.username')}
+              </label>
             </Form.Group>
-            <Form.Group>
-              <FloatingLabel
-                controlId="password"
-                label={t('login.password')}
-                className="mb-3"
-              >
-                <Form.Control
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                  id="password"
-                  type="password"
-                  placeholder={t('login.password')}
-                  name="password"
-                  autoComplete="current-password"
-                  isInvalid={isAuthFailed}
-                  required
-                />
-                {isAuthFailed && <Form.Control.Feedback type="invalid" tooltip>{t('login.authFailed')}</Form.Control.Feedback>}
-              </FloatingLabel>
+            <Form.Group className="form-floating mb-3">
+              <Form.Control
+                onChange={formik.handleChange}
+                value={formik.values.password}
+                id="password"
+                type="password"
+                placeholder={t('login.password')}
+                name="password"
+                autoComplete="current-password"
+                isInvalid={isAuthFailed}
+                required
+              />
+              <label htmlFor="password">
+                {t('login.password')}
+              </label>
+              {isAuthFailed && <Form.Control.Feedback type="invalid" tooltip>{t('login.authFailed')}</Form.Control.Feedback>}
             </Form.Group>
             <Button variant="outline-primary" type="submit">{t('login.submit')}</Button>
           </Form>
