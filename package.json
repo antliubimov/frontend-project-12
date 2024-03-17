@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Simple analog of Slack",
   "main": "index.js",
-  "engines": {
-    "node": ">=18.18.0"
-  },
   "scripts": {
     "build": "npm run build --prefix frontend",
     "start": "start-server -s ./frontend/build",
